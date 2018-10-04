@@ -47,7 +47,7 @@ class calculo():
 
     def calculaMontante(self, isComposto):
         if (isComposto):
-            if (self.tempo != None and self.pJuros == None and self.vInicial != None and self.vFinal != None):
+            if (self.tempo != None and self.pJuros == None and self.vInicial != None and self.vFinal == None):
                 self.tempo = log1p(self.vFinal / self.vInicial) / log1p(1 + (self.pJuros / 100))
                 arrReturn = {"a.a": self.tempo / 360,
                              "a.m": self.tempo / 12}
@@ -55,11 +55,17 @@ class calculo():
                 return "Somente o campo 'Tempo de aplicação' pode ficar em branco'"
 
         else:
-            if (self.tempo == None and self.pJuros != None and self.vInicial != None and self.vFinal != None):
+            if (self.tempo == None and self.pJuros != None and self.vInicial != None and self.vFinal == None):
                 self.tempo = self.vFinal - self.vInicial / (self.vInicial * self.pJuros)
                 arrReturn = {"a.a": self.tempo / 360,
                              "a.m": self.tempo / 12}
 
         return arrReturn
+
+    def calculaValInicial(self, isComposto):
+        if(isComposto):
+            self.vInicial = self.v
+
+
 
 

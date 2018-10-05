@@ -1,9 +1,13 @@
 from tkinter import *
 from calculo import *
 
+def set_text(text, edt):
+    edt.delete(0,END)
+    edt.insert(0,text)
+    return
+
 
 def calcular(opt, entry):
-
     if (opt == 0):
         valorInicial = None
         valorFinal = float(edtValorFinal.get())
@@ -13,9 +17,11 @@ def calcular(opt, entry):
             tempoApli = (tempoApli / 360) / 100
         else:
             tempoApli = (tempoApli / 12) / 100
-        cCapital = calculo.calculo(valorInicial, tempoApli, valorFinal, taxaJuros)
-        entry["text"] = cCapital.calculaValInicial(var.get())
-        entry.place(x=200, y=50)
+        cCapital = calculo(valorInicial, tempoApli, valorFinal, taxaJuros)
+
+        set_text(cCapital.calculaValInicial(var.get()), entry)
+
+
 
     elif (opt == 1):
         valorInicial = float(edtValorInicial.get())
@@ -25,11 +31,9 @@ def calcular(opt, entry):
         cTempo = calculo(valorInicial, tempoApli, valorFinal, taxaJuros)
 
         if (varTipo.get() == 1):
-            entry["text"] = cTempo.calculaTempo(var.get(), varTipo.get())
-            entry.place(x=200, y=80)
+            set_text(cTempo.calculaTempo(var.get(), varTipo.get()), entry)
         else:
-            entry["text"] = cTempo.calculaTempo(var.get(), varTipo.get())
-            entry.place(x=200, y=80)
+            set_text(cTempo.calculaTempo(var.get(), varTipo.get()), entry)
 
     elif (opt == 2):
         valorInicial = float(edtValorInicial.get())
@@ -40,9 +44,8 @@ def calcular(opt, entry):
             tempoApli = (tempoApli / 360) / 100
         else:
             tempoApli = (tempoApli / 12) / 100
-        cMontante = calculo.calculo(valorInicial, tempoApli, valorFinal, taxaJuros)
-        entry["text"] = cMontante.calculaMontante(var.get())
-        entry.place(x=200, y=110)
+        cMontante = calculo(valorInicial, tempoApli, valorFinal, taxaJuros)
+        set_text(cMontante.calculaMontante(var.get()), entry)
 
     elif (opt == 3):
         valorInicial = float(edtValorInicial.get())
@@ -56,10 +59,7 @@ def calcular(opt, entry):
             tempoApli = tempoApli / 12
 
         cTaxa = calculo(valorInicial, tempoApli, valorFinal, taxaJuros)
-        entry["text"] = cTaxa.calculapJuros(var)
-        entry.place(x=200, y=140)
-        # s["text"] = "valor: "+str(cTaxa.calculapJuros(var))
-        # s.place(x=500, y= 200)
+        set_text(cTaxa.calculapJuros(var.get()), entry)
 
     else:
         s["text"] = "A opção selecionada é inválida"

@@ -12,18 +12,17 @@ class calculo():
             
             if(self.tempo == None and self.pJuros != None and self.vInicial != None and self.vFinal != None):
                 if(isAA):
-                    self.tempo = log10(self.vFinal/self.vInicial)/log10(1+ (self.pJuros/100))
+                    self.tempo = log10(self.vFinal/self.vInicial)/log10((self.pJuros/100)+1)
                     arrReturn = self.tempo/360
                 else:
                     self.tempo = log10(self.vFinal / self.vInicial) / log10(1 + (self.pJuros / 100))
-                    arrReturn = self.tempo / 12
-
+                    arrReturn = self.tempo
             else:
                 return "Somente o campo 'Tempo de aplicação' pode ficar em branco'"
 
         else:
             if (self.tempo == None and self.pJuros != None and self.vInicial != None and self.vFinal != None):
-                self.tempo = self.vFinal-self.vInicial/(self.vInicial*self.pJuros)
+                self.tempo = (self.vFinal-self.vInicial)/(self.vInicial*(self.pJuros/100))
                 arrReturn = self.tempo
 
         return arrReturn
